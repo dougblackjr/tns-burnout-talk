@@ -1,43 +1,54 @@
 <template>
-	<div class="hello">
-		<h1>I'm Not Growing Up, I'm Just Burning Out</h1>
-		<h2>EE Conf Talk - 2022</h2>
-		<p>
-			For a guide and recipes on how to configure / customize this project,<br>
-			check out the
-			<a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-		</p>
-		<h3>Installed CLI Plugins</h3>
-		<ul>
-			<li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-			<li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+	<div class="container m-auto">
+		<h1 class="font-bold text-3xl text-center text-indigo-700 my-4">I'm Not Growing Up, I'm Just Burning Out</h1>
+		<h2 class="font-bold text-xl text-center text-indigo-700 mb-4">EE Conf Talk - 2022</h2>
+		<p class="font-bold text-md text-center text-gray-700 mb-4">Here is a list of a few resources for the talk, and from the talk. We track no data on this site, and no tracking cookies are installed.</p>
+		<ul class="flex flex-col md:flex-row justify-around">
+			<li>
+				<a href="#" v-on:click.prevent="componentName = 'quizlet'" class="cursor-pointer">Take Assessment</a>
+			</li>
+			<li>
+				<a href="#" v-on:click.prevent="componentName = 'resources'" class="cursor-pointer">Resources</a>
+			</li>
+			<li>
+				<a href="https://eeconf.com/" target="_blank" class="cursor-pointer">EEConf</a>
+			</li>
+			<li>
+				<a href="https://docs.google.com/presentation/d/1V7l920bUxe0-cf1WOLKy6kG70Rp74MmQeFMvSVIE31Y/edit?usp=sharing" target="_blank" class="cursor-pointer">Slides</a>
+			</li>
+			<li>
+				<a href="https://triplenerdscore.net" target="_blank" class="cursor-pointer">TNS</a>
+			</li>
 		</ul>
+		<component
+			v-if="componentName"
+			:is="componentName"
+			v-on:change-page="changePage"
+		></component>
 	</div>
 </template>
 
 <script>
-export default {
-	name: 'HelloWorld',
-	props: {
-		msg: String
+	import Quizlet from './pages/Quizlet.vue'
+	import Resources from './pages/Resources.vue'
+	export default {
+		name: 'HelloWorld',
+		components: {
+			Quizlet,
+			Resources
+		},
+		data() {
+			return {
+				componentName: null
+			}
+		},
+		props: {
+			msg: String
+		},
+		methods: {
+			changePage(name) {
+				this.componentName = name
+			}
+		}
 	}
-}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-	margin: 40px 0 0;
-}
-ul {
-	list-style-type: none;
-	padding: 0;
-}
-li {
-	display: inline-block;
-	margin: 0 10px;
-}
-a {
-	color: #42b983;
-}
-</style>
