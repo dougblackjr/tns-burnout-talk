@@ -39,7 +39,7 @@
 		},
 		data() {
 			return {
-				componentName: null
+				componentName: 'quizlet'
 			}
 		},
 		props: {
